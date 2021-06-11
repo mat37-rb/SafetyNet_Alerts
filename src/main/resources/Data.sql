@@ -10,7 +10,9 @@ CREATE TABLE persons (
   phone VARCHAR(250) NOT NULL,
   email VARCHAR(250) NOT NULL
 );
- 
+
+ INSERT INTO persons (firstName, lastName, address, city, zip, phone, email) VALUES
+('John', 'Boyd', '1509 Culver St', 'Culver', '97451', '841-874-6512', 'jaboyd@email.com');
 
 DROP TABLE IF EXISTS firestations;
  

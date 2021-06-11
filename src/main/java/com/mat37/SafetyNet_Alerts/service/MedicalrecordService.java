@@ -1,11 +1,12 @@
-package com.mat37.SafetyNet.Alerts.service;
+package com.mat37.SafetyNet_Alerts.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mat37.SafetyNet.Alerts.model.Medicalrecord;
-import com.mat37.SafetyNet.Alerts.repository.MedicalrecordRepository;
+import com.mat37.SafetyNet_Alerts.model.Medicalrecord;
+import com.mat37.SafetyNet_Alerts.repository.MedicalrecordRepository;
 
 import lombok.Data;
 
@@ -13,9 +14,10 @@ import lombok.Data;
 @Service
 public class MedicalrecordService {
 
+	@Autowired
 	private MedicalrecordRepository medicalrecordRepository;
 
-	public Optional<Medicalrecord> getMedicalrecord(final Long id) {
+	public Optional<Medicalrecord> getMedicalrecord(final String id) {
 		return medicalrecordRepository.findById(id);
 	}
 
@@ -23,11 +25,11 @@ public class MedicalrecordService {
 		return medicalrecordRepository.findAll();
 	}
 
-	public void deleteMedicalrecord(final Long id) {
+	public void deleteMedicalrecord(final String id) {
 		medicalrecordRepository.deleteById(id);
 	}
 
-	public Medicalrecord SaveMedicalrecord(Medicalrecord medicalrecord) {
+	public Medicalrecord saveMedicalrecord(Medicalrecord medicalrecord) {
 		Medicalrecord saveMedicalrecord = medicalrecordRepository.save(medicalrecord);
 		return saveMedicalrecord;
 	}

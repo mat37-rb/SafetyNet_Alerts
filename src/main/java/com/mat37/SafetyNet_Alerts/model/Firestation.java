@@ -1,8 +1,6 @@
-package com.mat37.SafetyNet.Alerts.model;
+package com.mat37.SafetyNet_Alerts.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,9 +12,13 @@ import lombok.Data;
 public class Firestation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long id;
 
 	private String address;
 	private int station;
+
+	public static String generateId(Firestation firestation) {
+		return firestation.getAddress() + "_" + firestation.getStation();
+	}
 }

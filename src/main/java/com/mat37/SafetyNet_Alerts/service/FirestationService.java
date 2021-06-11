@@ -1,11 +1,12 @@
-package com.mat37.SafetyNet.Alerts.service;
+package com.mat37.SafetyNet_Alerts.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mat37.SafetyNet.Alerts.model.Firestation;
-import com.mat37.SafetyNet.Alerts.repository.FirestationRepository;
+import com.mat37.SafetyNet_Alerts.model.Firestation;
+import com.mat37.SafetyNet_Alerts.repository.FirestationRepository;
 
 import lombok.Data;
 
@@ -13,9 +14,10 @@ import lombok.Data;
 @Service
 public class FirestationService {
 
+	@Autowired
 	private FirestationRepository firestationRepository;
 
-	public Optional<Firestation> getFirestation(final Long id) {
+	public Optional<Firestation> getFirestation(final String id) {
 		return firestationRepository.findById(id);
 	}
 
@@ -23,11 +25,11 @@ public class FirestationService {
 		return firestationRepository.findAll();
 	}
 
-	public void deleteFirestation(final Long id) {
+	public void deleteFirestation(final String id) {
 		firestationRepository.deleteById(id);
 	}
 
-	public Firestation SaveFirestation(Firestation firestation) {
+	public Firestation saveFirestation(Firestation firestation) {
 		Firestation saveFirestation = firestationRepository.save(firestation);
 		return saveFirestation;
 	}
