@@ -45,9 +45,10 @@ public class PersonServiceTest {
 	public void personExisting() {
 		// GIVEN
 		List<Person> personsList = new ArrayList<>();
-		personMock1 = new Person("John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
+		personMock1 = new Person(1L, "John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
 				"jaboyd@email.com");
-		personMock2 = new Person("Jacob", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6513", "drk@email.com");
+		personMock2 = new Person(2L, "Jacob", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6513",
+				"drk@email.com");
 		personsList.add(personMock1);
 		personsList.add(personMock2);
 		when(personService.savePerson(personMock1)).thenReturn(personMock1);
@@ -65,7 +66,7 @@ public class PersonServiceTest {
 	public void researchPersonByCity() {
 		// GIVEN
 		List<Person> personsList = new ArrayList<>();
-		personMock1 = new Person("John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
+		personMock1 = new Person(1L, "John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
 				"jaboyd@email.com");
 		personsList.add(personMock1);
 		when(personService.savePerson(personMock1)).thenReturn(personMock1);

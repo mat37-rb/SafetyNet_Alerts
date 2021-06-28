@@ -14,4 +14,6 @@ public interface MedicalrecordRepository extends CrudRepository<Medicalrecord, S
 
 	List<Medicalrecord> findByLastName(String lastName);
 
+	List<Medicalrecord> findByLastNameIn(List<String> lastName);
+
 }

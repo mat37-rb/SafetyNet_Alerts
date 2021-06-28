@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mat37.SafetyNet_Alerts.DTO.ChildAlertDTO;
+import com.mat37.SafetyNet_Alerts.DTO.FireDTO;
 import com.mat37.SafetyNet_Alerts.DTO.FirestationDTO;
+import com.mat37.SafetyNet_Alerts.DTO.FloodStationDTO;
 import com.mat37.SafetyNet_Alerts.DTO.PersonInfoDTO;
+import com.mat37.SafetyNet_Alerts.DTO.PhoneAlertDTO;
 import com.mat37.SafetyNet_Alerts.service.PersonService;
 import com.mat37.SafetyNet_Alerts.service.SpecificEndPointsService;
 
@@ -28,8 +31,8 @@ public class SpecificEndPoints {
 	@ResponseBody
 	public String getPersonCoveredByStation(@RequestParam(value = "stationNumber") final int stationNumber,
 			HttpServletResponse response) {
-		List<FirestationDTO> firestations = specificEndPointsService.firestation(stationNumber);
-		if (!firestations.isEmpty()) {
+		FirestationDTO firestations = specificEndPointsService.firestation(stationNumber);
+		if (!firestations.equals(null)) {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -39,22 +42,26 @@ public class SpecificEndPoints {
 
 	@GetMapping("/childAlert")
 	@ResponseBody
-	public List<ChildAlertDTO> getAllChildren(@RequestParam(value = "address") final String address,
-			HttpServletResponse response) {
-		List<ChildAlertDTO> childAlerts = specificEndPointsService.childAlert(address);
-		if (!childAlerts.isEmpty()) {
+	public String getAllChildren(@RequestParam(value = "address") final String address, HttpServletResponse response) {
+		ChildAlertDTO childAlerts = specificEndPointsService.childAlert(address);
+		if (!childAlerts.equals(null)) {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
-//		return "Address: " + childAlerts;
-		return childAlerts;
+		return "Address: " + childAlerts;
 	}
 
 	@GetMapping("/phoneAlert")
 	@ResponseBody
 	public String getPhoneNumberCoveredByStation(@RequestParam(value = "firestation") final int firestationNumber,
 			HttpServletResponse response) {
+		List<PhoneAlertDTO> phoneAlerts = specificEndPointsService.phoneAlert(firestationNumber);
+		if (!phoneAlerts.isEmpty()) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 		return "FirestationNumber: " + firestationNumber;
 	}
 
@@ -62,6 +69,12 @@ public class SpecificEndPoints {
 	@ResponseBody
 	public String getPersonsByAddress(@RequestParam(value = "address") final String address,
 			HttpServletResponse response) {
+		FireDTO fires = specificEndPointsService.fire(address);
+		if (!fires.equals(null)) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 		return "Address: " + address;
 	}
 
@@ -69,12 +82,18 @@ public class SpecificEndPoints {
 	@ResponseBody
 	public String getHomeCoveredByStation(@RequestParam(value = "stations") final List<Integer> stations,
 			HttpServletResponse response) {
+		List<FloodStationDTO> floodStations = specificEndPointsService.floodStation(stations);
+		if (!floodStations.equals(null)) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 		return "Stations: " + stations;
 	}
 
 	@GetMapping("/personInfo")
 	@ResponseBody
-	public List<PersonInfoDTO> getAllPerson(@RequestParam(value = "firstName") final String firstName,
+	public String getAllPerson(@RequestParam(value = "firstName") final String firstName,
 			@RequestParam(value = "lastName") final String lastName, HttpServletResponse response) {
 		List<PersonInfoDTO> personInfo = specificEndPointsService.personInfo(firstName, lastName);
 		if (!personInfo.isEmpty()) {
@@ -82,21 +101,19 @@ public class SpecificEndPoints {
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
-//		return "FirstName: " + firstName + "LastName: " + lastName;
-		return personInfo;
+		return "FirstName: " + firstName + "LastName: " + lastName;
 	}
 
 	@GetMapping("/communityEmail")
 	@ResponseBody
-	public List<String> getAllMail(@RequestParam(value = "city") final String city, HttpServletResponse response) {
+	public String getAllMail(@RequestParam(value = "city") final String city, HttpServletResponse response) {
 		List<String> communityEmail = specificEndPointsService.communityEmail(city);
 		if (!communityEmail.isEmpty()) {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
-//		return "City: " + communityEmail;
-		return communityEmail;
+		return "City: " + communityEmail;
 	}
 
 }

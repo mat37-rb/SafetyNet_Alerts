@@ -1,13 +1,14 @@
 package com.mat37.SafetyNet_Alerts.DTO;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class FirestationDTO {
 
-	private final String firstName;
-	private final String lastName;
-	private final String address;
-	private final String phone;
+	private final List<FirestationPersonDTO> firestationPersonDTO;
+	private final int totalAdult;
+	private final int totalChild;
 
 }

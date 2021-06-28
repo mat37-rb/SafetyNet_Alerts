@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -11,6 +12,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import com.jsoniter.JsonIterator;
+import com.mat37.SafetyNet_Alerts.DTO.MedicalrecordDTO;
 import com.mat37.SafetyNet_Alerts.model.Firestation;
 import com.mat37.SafetyNet_Alerts.model.Medicalrecord;
 import com.mat37.SafetyNet_Alerts.model.Person;
@@ -55,7 +57,9 @@ public class JsonToJavaObject implements ApplicationRunner {
 		firestationRepository.saveAll(firestations);
 	}
 
-	private void saveMedicalrecords(List<Medicalrecord> medicalrecords) {
+	private void saveMedicalrecords(List<MedicalrecordDTO> medicalrecordsDTO) {
+		List<Medicalrecord> medicalrecords = medicalrecordsDTO.stream().map(MedicalrecordDTO::toMedicalrecord)
+				.collect(Collectors.toList());
 		medicalrecordRepository.saveAll(medicalrecords);
 	}
 

@@ -42,9 +42,9 @@ public class FirestationController {
 			if (address != null) {
 				currentFirestation.setAddress(address);
 			}
-			int station = firestation.getStation();
+			int station = firestation.getStationNumber();
 			if (station != 0) {
-				currentFirestation.setStation(station);
+				currentFirestation.setStationNumber(station);
 				;
 			}
 			firestationService.saveFirestation(currentFirestation);

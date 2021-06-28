@@ -11,26 +11,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import com.mat37.SafetyNet_Alerts.model.Person;
+import com.mat37.SafetyNet_Alerts.repository.PersonRepository;
 import com.mat37.SafetyNet_Alerts.service.PersonService;
 import com.mat37.SafetyNet_Alerts.service.SpecificEndPointsService;
 
 @WebMvcTest(PersonService.class)
+//@SpringBootTest
+//@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 public class SpecificEndPointsServiceTest {
 
-	@InjectMocks
+	@Mock
 	private PersonService personService;
 	private SpecificEndPointsService specificEndPointsService;
-
-	@Mock
-	private static Person personMock1;
-	private static Person personMock2;
+	private PersonRepository personRepository;
 
 	@BeforeEach
 	private void setUpPerTest() {
@@ -42,13 +41,13 @@ public class SpecificEndPointsServiceTest {
 	public void personExisting() {
 		// GIVEN
 		List<Person> personsList = new ArrayList<>();
-		personMock1 = new Person("John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
+		Person personMock1 = new Person(1L, "John", "Boyd", "1509 Culver St", "Culver", "97451", "841-874-6512",
 				"jaboyd@email.com");
-		personMock2 = new Person("Jacob", "Boyd", "1509 Culver St", "PARIS", "97451", "841-874-6513", "drk@email.com");
+		Person personMock2 = new Person(2L, "Jacob", "Boyd", "1509 Culver St", "PARIS", "97451", "841-874-6513",
+				"drk@email.com");
 		personsList.add(personMock1);
 		personsList.add(personMock2);
-		when(personService.savePerson(personMock1)).thenReturn(personMock1);
-		when(personService.savePerson(personMock2)).thenReturn(personMock2);
+		when(personRepository.findByCity("Culver")).thenReturn(personsList);
 		// WHEN
 		List<String> actualResult = specificEndPointsService.communityEmail("Culver");
 		// THEN

@@ -3,12 +3,11 @@ package com.mat37.SafetyNet_Alerts.DTO;
 import lombok.Data;
 
 @Data
-public class PersonInfoDTO {
+public class FirePersonDTO {
 
-	private final String firstName;
-	private final String address;
+	private final String lastName;
+	private final String phone;
 	private final Long age;
-	private final String email;
 	private final String[] medications;
 	private final String[] allergies;
 

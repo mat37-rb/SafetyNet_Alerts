@@ -1,15 +1,10 @@
 package com.mat37.SafetyNet_Alerts.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,44 +31,44 @@ public class MedicalrecordController {
 		return medicalrecordAdded;
 	}
 
-	@PutMapping("/medicalrecord")
-	public Medicalrecord updateMedicalrecord(@RequestBody Medicalrecord medicalrecord) {
-		String id = Medicalrecord.generateId(medicalrecord);
-		Optional<Medicalrecord> m = medicalrecordService.getMedicalrecord(id);
-		if (m.isPresent()) {
-			Medicalrecord currentMedicalrecord = m.get();
+//	@PutMapping("/medicalrecord")
+//	public Medicalrecord updateMedicalrecord(@RequestBody Medicalrecord medicalrecord) {
+//		String id = Medicalrecord.generateId(medicalrecord);
+//		Optional<Medicalrecord> m = medicalrecordService.getMedicalrecord(id);
+//		if (m.isPresent()) {
+//			Medicalrecord currentMedicalrecord = m.get();
+//
+//			String firstName = medicalrecord.getFirstName();
+//			if (firstName != null) {
+//				currentMedicalrecord.setFirstName(firstName);
+//			}
+//			String lastName = medicalrecord.getLastName();
+//			if (lastName != null) {
+//				currentMedicalrecord.setLastName(lastName);
+//				;
+//			}
+//			LocalDate birthdate = medicalrecord.getBirthdate();
+//			if (birthdate != null) {
+//				currentMedicalrecord.setBirthdate(birthdate);
+//			}
+//			List<String> medications = medicalrecord.getMedications();
+//			if (medications != null) {
+//				currentMedicalrecord.setMedications(medications);
+//				;
+//			}
+//			List<String> allergies = medicalrecord.getAllergies();
+//			if (allergies != null) {
+//				currentMedicalrecord.setAllergies(allergies);
+//				;
+//			}
+//			medicalrecordService.saveMedicalrecord(currentMedicalrecord);
+//			return currentMedicalrecord;
+//		} else {
+//			return null;
+//		}
+//	}
 
-			String firstName = medicalrecord.getFirstName();
-			if (firstName != null) {
-				currentMedicalrecord.setFirstName(firstName);
-			}
-			String lastName = medicalrecord.getLastName();
-			if (lastName != null) {
-				currentMedicalrecord.setLastName(lastName);
-				;
-			}
-			LocalDate birthdate = medicalrecord.getBirthdate();
-			if (birthdate != null) {
-				currentMedicalrecord.setBirthdate(birthdate);
-			}
-			List<String> medications = medicalrecord.getMedications();
-			if (medications != null) {
-				currentMedicalrecord.setMedications(medications);
-				;
-			}
-			List<String> allergies = medicalrecord.getAllergies();
-			if (allergies != null) {
-				currentMedicalrecord.setAllergies(allergies);
-				;
-			}
-			medicalrecordService.saveMedicalrecord(currentMedicalrecord);
-			return currentMedicalrecord;
-		} else {
-			return null;
-		}
-	}
-
-	@DeleteMapping("/person")
+	@DeleteMapping("/medicalrecord")
 	public void deleteMedicalrecord(@RequestBody final Medicalrecord medicalrecord) {
 		medicalrecordService.deleteMedicalrecord(Medicalrecord.generateId(medicalrecord));
 	}

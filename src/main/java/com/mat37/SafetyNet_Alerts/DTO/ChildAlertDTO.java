@@ -1,19 +1,15 @@
 package com.mat37.SafetyNet_Alerts.DTO;
 
+import java.util.List;
+
+import com.mat37.SafetyNet_Alerts.model.Person;
+
 import lombok.Data;
 
 @Data
 public class ChildAlertDTO {
 
-	private String firstName;
-	private String lastName;
-	private int age;
-
-	public ChildAlertDTO(String childFirstName, String childLastName, int childAge) {
-
-		this.firstName = childFirstName;
-		this.lastName = childLastName;
-		this.age = childAge;
-	}
+	private final List<Person> childList;
+	private final List<Person> houseMembers;
 
 }

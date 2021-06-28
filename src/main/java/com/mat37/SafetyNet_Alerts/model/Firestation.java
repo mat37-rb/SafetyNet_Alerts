@@ -16,9 +16,9 @@ public class Firestation {
 //	private Long id;
 
 	private String address;
-	private int station;
+	private int stationNumber;
 
 	public static String generateId(Firestation firestation) {
-		return firestation.getAddress() + "_" + firestation.getStation();
+		return firestation.getAddress() + "_" + firestation.getStationNumber();
 	}
 }
